@@ -39,6 +39,11 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @ORM\Column(type="string", columnDefinition="ENUM('pending', 'active', 'inactive', 'suspended')")
+     */
+    private $status;
+
+    /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="commentBy")
      */
     private $comments;
@@ -108,6 +113,17 @@ class User implements UserInterface
 
         return $this;
     }
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
 
     /**
      * @see UserInterface
@@ -154,6 +170,20 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setStatusValue () {
+        $this->status = 'pending';
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setRolesValue () {
+        $this->roles = ["ROLE_USER"];
     }
     
     public function __toString() {

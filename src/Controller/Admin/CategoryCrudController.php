@@ -27,5 +27,10 @@ class CategoryCrudController extends AbstractCrudController
             //AssociationField::new('posts'),
         ];
     }
+
+    // public function configureCrud(Crud $crud): Crud
+    // {
+    //     return $crud->setEntityPermission('ROLE_ADMIN');
+    // }
     
 }

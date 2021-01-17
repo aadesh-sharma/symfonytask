@@ -24,7 +24,7 @@ class CommentCrudController extends AbstractCrudController
             TextField::new('content'),
             BooleanField::new('status'),
             AssociationField::new('postTitle'),
-            AssociationField::new('commentBy'),
+            //AssociationField::new('commentBy'),
         ];
     }
     

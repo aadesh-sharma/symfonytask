@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Entity;
-
+use App\Entity\User;
 use App\Repository\CommentRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -68,7 +69,7 @@ class Comment
     }
 
     public function setStatus(bool $status): self
-    {
+    {   
         $this->status = $status;
 
         return $this;
@@ -121,12 +122,19 @@ class Comment
     /**
      * @ORM\PrePersist
      */
-
     public function getCommentByValue(): ?User
     {
         return $this->commentBy;
     }
      
+     /**
+     * @ORM\PrePersist
+     */
+    public function  setStatusValue(): ?User
+    {
+        $this->status=0;
+    }
+
     // /**
     //  * @ORM\PrePersist
     //  */

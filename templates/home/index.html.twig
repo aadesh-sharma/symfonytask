@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+<h1>WELCOME TO HOME</h1>
+<div class="container">
+    <div class="row">
+           {% for post in posts %}
+                <div class="col-md-6">
+                    <div class="jumbotron">
+                        <div class="col-sm-8">
+                            <div class="card-body d-flex flex-column align-items-start">
+                                <h3 class="mb-0">
+                                    <a class="text-dark" href="{{path('show_post', {id: post.getId()})}}">{{post.getTitle()}}</a>
+                                </h3>
+                                <div class="mb-1 text-muted">{{post.getCreated()|date('j M, Y h:i A')}}</div>
+                                <p class="card-text mb-auto">{{post.getContent()|striptags|slice(0, 50)}}</p>
+                                <a href="{{path('show_post', {id: post.getId()})}}">Continue reading</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-4"><img src="#" alt="Thumbnail" style="max-width: 100%;"></div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            {% endfor %}
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}{% endblock %}

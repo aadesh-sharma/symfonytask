@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}All available Posts!{% endblock %}
+
+{% block body %}
+    <div class="example-wrapper">
+        <h1>All Post</h1>
+
+        <table class="table table-bordered">
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+
+            {% for post in posts %}
+                <tr>
+                    <td>{{post.getId()}}</td>
+                    <td>{{post.getTitle()}}</td>
+                    <td>{{post.getContent()}}</td>
+                    <td>{{post.getCreated()|date('M j, Y h:i A')}}</td>
+                    <td>
+                       #
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

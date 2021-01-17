@@ -1,12 +1,72 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<html lang="en">
+
+<head>
+	
+	<title>{% block title %}Project{% endblock %}</title>
+    {% block stylesheets %}
+	
+	
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- Custom stlylesheet -->
+    {% endblock %}
+</head>
+
+<body>
+    
+      <div class="container text-center " >
+         <h1>Articles</h1>      
+         <p>hello world</p>
+    </div>
+
+	
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="{{ path('home') }}"><span class="glyphicon glyphicon-home"></span>Project</a>
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">	
+					
+                    <ul class="nav navbar-nav">
+						{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+							<li><a href="{{ path('create_post') }}">Add Post</a></li>
+						{% endif %}
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+							<li><a href="{{ path('app_logout') }}">Logout</a></li>
+						{% else %}
+							<li><a href="{{ path('app_register') }}"><span class="glyphicon glyphicon-user"></span>Signup</a></li>
+							<li><a href="{{ path('app_login') }}">Login</a></li>
+						{% endif %}
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<div class="container">
+            {% block body %}{% endblock %}
+		</div>
+		<footer>
+			<div class="container text-center">&copy; Copyright 2021 Developed by AADESH SHARMA</div>
+	   </footer>
+	
+
+
+
+	{% block javascripts %}
+	<script src="https://use.fontawesome.com/63d6908806.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  {% endblock %}
+</body>
 </html>
