@@ -66,66 +66,22 @@ class EasyAdminSubscriber implements EventSubscriberInterface
     public function sendMail(AfterEntityPersistedEvent $event)
     {   dump("created");
         $entity = $event->getEntityInstance();
-     
-     //send mail after user created   
-        if ($entity instanceof User){
-          $this->mailer->send((new NotificationEmail())
-          ->subject('New user created')
-          ->htmlTemplate('emails/user_notification.html.twig')
-          ->from($this->adminEmail)
-          ->to($this->adminEmail)
-          ->context(['comment' => "user created"])
-          );
+       $entity = $event->getEntityInstance();
+    //     dump($entity);
+    //     if (!($entity instanceof User)) {
+    //         return;
+    //     }
             
-        }
+    //     //$status ="active";    
+    //     //$cmby=$entity->get
+    //     //$entity->setStatus($status);
 
-        //send mail to all authors when new category created   
-        if ($entity instanceof Category){
-            $cat_name=$entity->getName();
-            $all_auhtors=$this->$UserRepository->findBy([
-                'roles' => 'ROLE_AUTHOR'
-            ]);
-            
-            $this->mailer->send((new NotificationEmail())
-            ->subject('New Category created')
-            ->htmlTemplate('emails/user_notification.html.twig')
-            ->from($this->adminEmail)
-            ->to($all_authors)
-            //->to($this->adminEmail)
-            ->context(['comment' => $cat_name])
-            );
-              
-          }
-
-    }
+    //     $entity->setStatus("pending");
+    //     $entity->setStatus("active");
+    //     $entity->setStatus("trashed");
     
-    public function sendPostCommMail(AfterEntityUpdatedEvent $event)
-    {   
-        $entity = $event->getEntityInstance();
-     
-     //send mail after post status changed    
-        if ($entity instanceof Post){
-          $this->mailer->send((new NotificationEmail())
-          ->subject('Post status changed')
-          ->htmlTemplate('emails/user_notification.html.twig')
-          ->from($this->adminEmail)
-          ->to($this->adminEmail)
-          ->context(['comment' => "post status changed"])
-          );
-            
-        }
 
-         //send mail after  comment status changed    
-         if ($entity instanceof Comment){
-            $this->mailer->send((new NotificationEmail())
-            ->subject('Comment status changed')
-            ->htmlTemplate('emails/user_notification.html.twig')
-            ->from($this->adminEmail)
-            ->to($this->adminEmail)
-            ->context(['comment' =>"comment status changed"])
-            );
-              
-          }
+       
     }
     
 
